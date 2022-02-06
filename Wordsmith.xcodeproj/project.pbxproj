@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6CB6639E27ACEA11001770DE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638327ACEA11001770DE /* StatisticsView.swift */; };
+		6CB6639F27ACEA11001770DE /* AttemptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638427ACEA11001770DE /* AttemptView.swift */; };
+		6CB663A027ACEA11001770DE /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638527ACEA11001770DE /* DebugView.swift */; };
+		6CB663A127ACEA11001770DE /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638627ACEA11001770DE /* KeyboardView.swift */; };
+		6CB663A227ACEA11001770DE /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638727ACEA11001770DE /* TopBar.swift */; };
+		6CB663A327ACEA11001770DE /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638827ACEA11001770DE /* TutorialView.swift */; };
+		6CB663A427ACEA11001770DE /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638927ACEA11001770DE /* GridView.swift */; };
+		6CB663A527ACEA11001770DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638A27ACEA11001770DE /* ContentView.swift */; };
+		6CB663A627ACEA11001770DE /* LetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638B27ACEA11001770DE /* LetterView.swift */; };
+		6CB663A727ACEA11001770DE /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638D27ACEA11001770DE /* ErrorViewModel.swift */; };
+		6CB663A827ACEA11001770DE /* WordleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638E27ACEA11001770DE /* WordleViewModel.swift */; };
+		6CB663A927ACEA11001770DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6638F27ACEA11001770DE /* Assets.xcassets */; };
+		6CB663AA27ACEA11001770DE /* Wordsmith_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639027ACEA11001770DE /* Wordsmith_App.swift */; };
+		6CB663AB27ACEA11001770DE /* Letter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639227ACEA11001770DE /* Letter.swift */; };
+		6CB663AC27ACEA11001770DE /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639327ACEA11001770DE /* Keyboard.swift */; };
+		6CB663AD27ACEA11001770DE /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639527ACEA11001770DE /* BannerView.swift */; };
+		6CB663AE27ACEA11001770DE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639627ACEA11001770DE /* Enums.swift */; };
+		6CB663AF27ACEA11001770DE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639727ACEA11001770DE /* Extensions.swift */; };
+		6CB663B027ACEA11001770DE /* DefinitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639827ACEA11001770DE /* DefinitionView.swift */; };
+		6CB663B127ACEA11001770DE /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6639927ACEA11001770DE /* Defaults.swift */; };
+		6CB663B227ACEA11001770DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6639B27ACEA11001770DE /* Preview Assets.xcassets */; };
+		6CB663B327ACEA11001770DE /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6639C27ACEA11001770DE /* words.txt */; };
+		6CB663B427ACEA11001770DE /* wordles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6639D27ACEA11001770DE /* wordles.txt */; };
+		6CB663B727AD3293001770DE /* GKLeaderBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB663B627AD3293001770DE /* GKLeaderBoardView.swift */; };
+		6CB663B927AD32C5001770DE /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB663B827AD32C5001770DE /* GameCenter.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6CB6636B27ACE9D0001770DE /* Wordsmith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wordsmith.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CB6638327ACEA11001770DE /* StatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		6CB6638427ACEA11001770DE /* AttemptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptView.swift; sourceTree = "<group>"; };
+		6CB6638527ACEA11001770DE /* DebugView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		6CB6638627ACEA11001770DE /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		6CB6638727ACEA11001770DE /* TopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		6CB6638827ACEA11001770DE /* TutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		6CB6638927ACEA11001770DE /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		6CB6638A27ACEA11001770DE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6CB6638B27ACEA11001770DE /* LetterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterView.swift; sourceTree = "<group>"; };
+		6CB6638D27ACEA11001770DE /* ErrorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
+		6CB6638E27ACEA11001770DE /* WordleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordleViewModel.swift; sourceTree = "<group>"; };
+		6CB6638F27ACEA11001770DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6CB6639027ACEA11001770DE /* Wordsmith_App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wordsmith_App.swift; sourceTree = "<group>"; };
+		6CB6639227ACEA11001770DE /* Letter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Letter.swift; sourceTree = "<group>"; };
+		6CB6639327ACEA11001770DE /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		6CB6639527ACEA11001770DE /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		6CB6639627ACEA11001770DE /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		6CB6639727ACEA11001770DE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6CB6639827ACEA11001770DE /* DefinitionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionView.swift; sourceTree = "<group>"; };
+		6CB6639927ACEA11001770DE /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		6CB6639B27ACEA11001770DE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6CB6639C27ACEA11001770DE /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
+		6CB6639D27ACEA11001770DE /* wordles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wordles.txt; sourceTree = "<group>"; };
+		6CB663B527ACEA85001770DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6CB663B627AD3293001770DE /* GKLeaderBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKLeaderBoardView.swift; sourceTree = "<group>"; };
+		6CB663B827AD32C5001770DE /* GameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6CB6636827ACE9D0001770DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6CB6636227ACE9D0001770DE = {
+			isa = PBXGroup;
+			children = (
+				6CB6638127ACEA10001770DE /* Wordsmith */,
+				6CB6636C27ACE9D0001770DE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6CB6636C27ACE9D0001770DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6636B27ACE9D0001770DE /* Wordsmith.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CB6638127ACEA10001770DE /* Wordsmith */ = {
+			isa = PBXGroup;
+			children = (
+				6CB663B527ACEA85001770DE /* Info.plist */,
+				6CB6638227ACEA11001770DE /* UI */,
+				6CB6638C27ACEA11001770DE /* ViewModels */,
+				6CB6638F27ACEA11001770DE /* Assets.xcassets */,
+				6CB6639027ACEA11001770DE /* Wordsmith_App.swift */,
+				6CB6639127ACEA11001770DE /* Objects */,
+				6CB6639427ACEA11001770DE /* Utils */,
+				6CB6639A27ACEA11001770DE /* Preview Content */,
+				6CB6639C27ACEA11001770DE /* words.txt */,
+				6CB6639D27ACEA11001770DE /* wordles.txt */,
+			);
+			path = Wordsmith;
+			sourceTree = "<group>";
+		};
+		6CB6638227ACEA11001770DE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6638327ACEA11001770DE /* StatisticsView.swift */,
+				6CB6638427ACEA11001770DE /* AttemptView.swift */,
+				6CB6638527ACEA11001770DE /* DebugView.swift */,
+				6CB6638627ACEA11001770DE /* KeyboardView.swift */,
+				6CB6638727ACEA11001770DE /* TopBar.swift */,
+				6CB663B627AD3293001770DE /* GKLeaderBoardView.swift */,
+				6CB6638827ACEA11001770DE /* TutorialView.swift */,
+				6CB6638927ACEA11001770DE /* GridView.swift */,
+				6CB6638A27ACEA11001770DE /* ContentView.swift */,
+				6CB6638B27ACEA11001770DE /* LetterView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6CB6638C27ACEA11001770DE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6638D27ACEA11001770DE /* ErrorViewModel.swift */,
+				6CB6638E27ACEA11001770DE /* WordleViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6CB6639127ACEA11001770DE /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6639227ACEA11001770DE /* Letter.swift */,
+				6CB6639327ACEA11001770DE /* Keyboard.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		6CB6639427ACEA11001770DE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6639527ACEA11001770DE /* BannerView.swift */,
+				6CB6639627ACEA11001770DE /* Enums.swift */,
+				6CB6639727ACEA11001770DE /* Extensions.swift */,
+				6CB6639827ACEA11001770DE /* DefinitionView.swift */,
+				6CB663B827AD32C5001770DE /* GameCenter.swift */,
+				6CB6639927ACEA11001770DE /* Defaults.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		6CB6639A27ACEA11001770DE /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6639B27ACEA11001770DE /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6CB6636A27ACE9D0001770DE /* Wordsmith */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CB6637E27ACE9D1001770DE /* Build configuration list for PBXNativeTarget "Wordsmith" */;
+			buildPhases = (
+				6CB6636727ACE9D0001770DE /* Sources */,
+				6CB6636827ACE9D0001770DE /* Frameworks */,
+				6CB6636927ACE9D0001770DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Wordsmith;
+			productName = Wordsmith;
+			productReference = 6CB6636B27ACE9D0001770DE /* Wordsmith.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6CB6636327ACE9D0001770DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					6CB6636A27ACE9D0001770DE = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 6CB6636627ACE9D0001770DE /* Build configuration list for PBXProject "Wordsmith" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6CB6636227ACE9D0001770DE;
+			productRefGroup = 6CB6636C27ACE9D0001770DE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6CB6636A27ACE9D0001770DE /* Wordsmith */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6CB6636927ACE9D0001770DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CB663B227ACEA11001770DE /* Preview Assets.xcassets in Resources */,
+				6CB663B427ACEA11001770DE /* wordles.txt in Resources */,
+				6CB663A927ACEA11001770DE /* Assets.xcassets in Resources */,
+				6CB663B327ACEA11001770DE /* words.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6CB6636727ACE9D0001770DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CB663B727AD3293001770DE /* GKLeaderBoardView.swift in Sources */,
+				6CB663A227ACEA11001770DE /* TopBar.swift in Sources */,
+				6CB663A027ACEA11001770DE /* DebugView.swift in Sources */,
+				6CB6639E27ACEA11001770DE /* StatisticsView.swift in Sources */,
+				6CB663A327ACEA11001770DE /* TutorialView.swift in Sources */,
+				6CB663B927AD32C5001770DE /* GameCenter.swift in Sources */,
+				6CB663A127ACEA11001770DE /* KeyboardView.swift in Sources */,
+				6CB663A527ACEA11001770DE /* ContentView.swift in Sources */,
+				6CB663AF27ACEA11001770DE /* Extensions.swift in Sources */,
+				6CB6639F27ACEA11001770DE /* AttemptView.swift in Sources */,
+				6CB663A427ACEA11001770DE /* GridView.swift in Sources */,
+				6CB663A827ACEA11001770DE /* WordleViewModel.swift in Sources */,
+				6CB663B027ACEA11001770DE /* DefinitionView.swift in Sources */,
+				6CB663AC27ACEA11001770DE /* Keyboard.swift in Sources */,
+				6CB663A727ACEA11001770DE /* ErrorViewModel.swift in Sources */,
+				6CB663A627ACEA11001770DE /* LetterView.swift in Sources */,
+				6CB663B127ACEA11001770DE /* Defaults.swift in Sources */,
+				6CB663AB27ACEA11001770DE /* Letter.swift in Sources */,
+				6CB663AD27ACEA11001770DE /* BannerView.swift in Sources */,
+				6CB663AE27ACEA11001770DE /* Enums.swift in Sources */,
+				6CB663AA27ACEA11001770DE /* Wordsmith_App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6CB6637C27ACE9D1001770DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6CB6637D27ACE9D1001770DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6CB6637F27ACE9D1001770DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_ASSET_PATHS = "\"Wordsmith/Preview Content\"";
+				DEVELOPMENT_TEAM = M9BZ2GV933;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wordsmith/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = brandonthio.Wordsmith;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6CB6638027ACE9D1001770DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_ASSET_PATHS = "\"Wordsmith/Preview Content\"";
+				DEVELOPMENT_TEAM = M9BZ2GV933;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wordsmith/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = brandonthio.Wordsmith;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CB6636627ACE9D0001770DE /* Build configuration list for PBXProject "Wordsmith" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CB6637C27ACE9D1001770DE /* Debug */,
+				6CB6637D27ACE9D1001770DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CB6637E27ACE9D1001770DE /* Build configuration list for PBXNativeTarget "Wordsmith" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CB6637F27ACE9D1001770DE /* Debug */,
+				6CB6638027ACE9D1001770DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6CB6636327ACE9D0001770DE /* Project object */;
+}
