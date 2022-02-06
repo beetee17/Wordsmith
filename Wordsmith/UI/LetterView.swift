@@ -13,7 +13,7 @@ struct LetterView: View {
     var letter: Letter?
     var isSelected: Bool
     var animationDuration = 0.2
-    let size = Device.width/6.4
+    let size = min(90, Device.width/6.4)
     let letterShape = RoundedRectangle(cornerRadius: 10)
     
     var body: some View {

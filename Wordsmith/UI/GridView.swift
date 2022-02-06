@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GridView: View {
     @EnvironmentObject var viewModel: WordleViewModel
-    
     let columns: [GridItem] = Array(repeating: .init(.flexible()),
                                     count: Game.numLetters)
     
@@ -36,6 +35,7 @@ struct GridView: View {
                 .padding(.horizontal, 10)
             }
         }
+        .frame(maxWidth: 550)
     }
 }
 
