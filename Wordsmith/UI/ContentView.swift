@@ -12,6 +12,10 @@ struct ContentView: View {
     @EnvironmentObject var viewModel: WordleViewModel
     @EnvironmentObject var errorHandler: ErrorViewModel
     
+    @State private var topSize: CGFloat = 0
+    @State private var bottomSize: CGFloat = 0
+    @State private var availableSize: CGFloat = 0
+    
     @State private var showStats = false
     @State private var showTutorial = false
     @State private var definitionToShow = ""
@@ -26,23 +30,30 @@ struct ContentView: View {
                 
         } else {
             ZStack {
-                Color.BG.ignoresSafeArea()
+                Color.BG
+                    .ignoresSafeArea()
+                    .extractGeometry { frame in
+                        availableSize = frame.height
+                    }
                 
                 VStack {
                     
-                    TopBar(showStats: $showStats,
-                           showTutorial: $showTutorial,
-                           showLeaderboards: $showLeaderboards)
+                    VStack {
+                        TopBar(showStats: $showStats,
+                               showTutorial: $showTutorial,
+                               showLeaderboards: $showLeaderboards)
+                        GridView()
+                    }.extractGeometry { frame in topSize = frame.height }
                     
-                    Spacer()
                     
-                    GridView()
                     
-                    HintButton(action: viewModel.getHint)
+                    HintButton(action: viewModel.getHint).frame(height: availableSize - (topSize + bottomSize))
                     
-                    Spacer()
                     
-                    KeyboardView()
+                    
+                    KeyboardView().extractGeometry { frame in bottomSize = frame.height }
+                    
+        
                 }
                 .opacity(showStats ? 0.2 : 1)
                 

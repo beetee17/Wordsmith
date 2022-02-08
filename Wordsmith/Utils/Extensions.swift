@@ -133,6 +133,18 @@ struct PulseEffect: ViewModifier {
     }
 }
 
+struct GeometryExtractor: ViewModifier {
+    var completion: (CGRect) -> Void
+    
+    func body(content: Content) -> some View {
+        content
+            .background(GeometryReader{ geo in
+                Color.clear
+                    .onAppear(perform: { completion(geo.frame(in: .global)) })
+            })
+    }
+}
+
 // Conditional Modifier
 // Text("some Text").if(modifierEnabled) { $0.foregroundColor(.Red) }
 extension View {
@@ -144,7 +156,12 @@ extension View {
             self
         }
     }
+    
     func pulseEffect() -> some View  {
         self.modifier(PulseEffect())
+    }
+    
+    func extractGeometry(_ completion: @escaping (CGRect) -> Void) -> some View  {
+        self.modifier(GeometryExtractor(completion: completion))
     }
 }
