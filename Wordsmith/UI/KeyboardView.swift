@@ -11,73 +11,113 @@ struct KeyboardView: View {
     
     @EnvironmentObject var viewModel: WordleViewModel
     @ObservedObject var keyboard = Keyboard.shared
+    static var buttonHeight = Device.height*0.052
     
     var body: some View {
-        let topRow = keyboard.topRow
-        let middleRow = keyboard.middleRow
-        let bottomRow = keyboard.bottomRow
-        let letterGridItem = GridItem(.flexible(), spacing: 3)
-        let buttonGridItem = GridItem(.fixed(Device.width/7), spacing: 3)
+        let firstRow = keyboard.topRow
+        let secondRow = keyboard.middleRow
+        let thirdRow = keyboard.bottomRow
+        
+        let letter = GridItem(.flexible(), spacing: 5)
+        let backspace = GridItem(.fixed(Device.width/7), spacing: 10)
+        
+        let enter = GridItem(.flexible(), spacing: 3)
+        let spaceBar = GridItem(.fixed(Device.width*0.5), spacing: 5)
+        let giveUp = GridItem(.flexible(), spacing: 5)
+        
+        
         
         VStack {
-            LazyVGrid(columns: Array(repeating: letterGridItem,
-                                     count: topRow.count)) {
-                ForEach(topRow) { letter in
+            LazyVGrid(columns: Array(repeating: letter,
+                                     count: firstRow.count)) {
+                ForEach(firstRow) { letter in
                     KeyboardLetter(letter: letter)
                 }
             }
             
-            LazyVGrid(columns: Array(repeating: letterGridItem,
-                                     count:middleRow.count)) {
-                ForEach(middleRow) { letter in
+            LazyVGrid(columns: Array(repeating: letter,
+                                     count:secondRow.count)) {
+                ForEach(secondRow) { letter in
                     KeyboardLetter(letter: letter)
                 }
             }
             .padding(.horizontal, Device.width/20)
             
-            let bottomLayout = [
-                [buttonGridItem],
-                Array(repeating: letterGridItem,
-                      count: bottomRow.count),
-                [buttonGridItem]
+            let thirdRowLayout = [
+                [backspace],
+                Array(repeating: letter,
+                      count: thirdRow.count),
+                [backspace]
             ].flatMap({$0})
 
-            LazyVGrid(columns: bottomLayout) {
+            LazyVGrid(columns: thirdRowLayout) {
+                Color.clear
                 
-                Button(action: viewModel.confirmAttempt) {
-                    RoundedRectangle(cornerRadius: 5)
-                        .frame(width: Device.width/7, height:Device.height*0.07)
-                        .foregroundColor(Color.KEYBOARD)
-                        .overlay(
-                            Image(systemName: "square.fill")
-                                .resizable().scaledToFill()
-                                .foregroundColor(.ENTER)
-                                .scaleEffect(0.3)
-                                
-                        )
-                }
-                
-                ForEach(bottomRow) { letter in
+                ForEach(thirdRow) { letter in
                     KeyboardLetter(letter: letter)
                 }
                 
                 
                 Button(action: viewModel.deleteChar) {
                     RoundedRectangle(cornerRadius: 5)
-                        .frame(width: Device.width/7, height: Device.height*0.07)
+                        .frame(height: KeyboardView.buttonHeight)
                         .foregroundColor(Color.KEYBOARD)
                         .overlay(
                             Image(systemName: "delete.left.fill")
                                 .resizable().scaledToFill()
                                 .foregroundColor(.DELETE)
-                                .scaleEffect(0.3)
+                                .scaleEffect(0.4)
                                 
                         )
+                        .padding(.leading, 5)
                     
                 }
             }
+            
+            let bottomRowLayout = [
+                [giveUp],
+                [spaceBar],
+                [enter]
+            ].flatMap({$0})
+            
+            LazyVGrid(columns: bottomRowLayout) {
+                
+                Button(action: viewModel.surrender) {
+                    // this button should pass the word
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(height: KeyboardView.buttonHeight)
+                        .foregroundColor(Color.KEYBOARD)
+                        .overlay(
+                            Image(systemName: "flag.fill")
+                                .resizable().scaledToFit()
+                                .foregroundColor(.white)
+                                .scaleEffect(0.4)
+                                
+                        )
+                }
+                Button(action: viewModel.incrementSelection ) {
+                    // should increment selection
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(height: KeyboardView.buttonHeight)
+                        .foregroundColor(Color.KEYBOARD)
+
+                }
+                
+                Button(action: viewModel.confirmAttempt) {
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(height: KeyboardView.buttonHeight)
+                        .foregroundColor(Color.KEYBOARD)
+                        .overlay(
+                            Image(systemName: "square.fill")
+                                .resizable().scaledToFit()
+                                .foregroundColor(.ENTER)
+                                .scaleEffect(0.5)
+                                
+                        )
+                }
+            }
         }
-        .padding(5)
+        .padding(.horizontal, 5)
     }
 }
 
@@ -89,7 +129,7 @@ struct KeyboardLetter: View {
     var body: some View {
         Button(action: { viewModel.addChar(Letter(letter.string)) }) {
             RoundedRectangle(cornerRadius: 5)
-                .frame(height: Device.height*0.07)
+                .frame(height: KeyboardView.buttonHeight)
                 .foregroundColor(letter.color)
                 .animation(.easeInOut(duration: 0.2))
                 .overlay(

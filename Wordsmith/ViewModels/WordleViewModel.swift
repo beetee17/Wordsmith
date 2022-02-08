@@ -57,6 +57,15 @@ class WordleViewModel: ObservableObject {
         lastEditAction = action
     }
     
+    func incrementSelection() {
+        if lastEditAction == .Insert {
+            selection = min(selection+2, Game.numLetters)
+        } else {
+            selection = min(selection+1, Game.numLetters)
+        }
+        lastEditAction = .None
+    }
+    
     func addChar(_ char: Letter) {
         updateSelection(to: selection+1, action: .Insert)
         currentAttempt[selection] = char
@@ -66,6 +75,21 @@ class WordleViewModel: ObservableObject {
     func deleteChar() {
         updateSelection(to: selection-1, action: .Delete)
         currentAttempt[selection] = nil
+    }
+    
+    func surrender() {
+        let alertTitle = "STREAK LOST"
+        let alertMessage = "\nPrevious Best: \(previousBest) \n\nThe word was \(wordle.capitalized)"
+        ErrorViewModel.shared.showAlert(alertTitle, alertMessage) {
+            Player.incrementNumPlayed()
+            self.currentStreak = 0
+            self.reset()
+            
+        }
+    
+        self.currentAttempt = Array(repeating: nil, count: Game.numLetters)
+        self.updateSelection(to: 0, action: .None)
+
     }
     
     func confirmAttempt() {
