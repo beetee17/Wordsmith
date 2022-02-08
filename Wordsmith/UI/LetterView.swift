@@ -28,16 +28,18 @@ struct LetterView: View {
                 .scaleEffect(animating ? 1.05 : 1)
                 .animation(.easeInOut(duration: animationDuration))
             
+            
             if let letter = letter {
                 Text(letter.string)
                     .font(.system(size: size*0.6, weight: .heavy, design: .monospaced))
                     .foregroundColor(.white)
                     .textCase(.uppercase)
                     .onAppear {
-                        print("LETTER \(letter.string)")
-                        animating = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
-                            animating = false
+                        if !letter.isHint {
+                            animating = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+                                animating = false
+                            }
                         }
                     }
             }
@@ -45,6 +47,9 @@ struct LetterView: View {
         .scaleEffect(isSelected ? 1.05 : 1)
     }
     func getBorderColor() -> Color {
+        if letter?.isHint ?? false {
+            return .PERFECT
+        }
         guard !isSelected else {
             return .white
         }
@@ -54,14 +59,14 @@ struct LetterView: View {
         guard let color = letter.color else {
             return .white.opacity(0.8)
         }
-        return color
+        return color.opacity(0.2)
     }
 }
 
 struct LetterView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.accentColor
+            Color.BG
             LetterView(letter: nil, isSelected: true)
         }
     }

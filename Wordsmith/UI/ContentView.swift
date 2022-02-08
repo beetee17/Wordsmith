@@ -26,7 +26,7 @@ struct ContentView: View {
                 
         } else {
             ZStack {
-                Color.accentColor.ignoresSafeArea()
+                Color.BG.ignoresSafeArea()
                 
                 VStack {
                     
@@ -34,11 +34,13 @@ struct ContentView: View {
                            showTutorial: $showTutorial,
                            showLeaderboards: $showLeaderboards)
                     
-                    GridView()
-                    
                     Spacer()
                     
-                    //                HintButton()
+                    GridView()
+                    
+                    HintButton(action: viewModel.getHint)
+                    
+                    Spacer()
                     
                     KeyboardView()
                 }
@@ -102,29 +104,10 @@ struct ContentView: View {
     }
 }
 
-
-
-struct HintButton: View {
-    var body: some View {
-        Button(action: { }) {
-            HStack {
-                Image(systemName: "lightbulb.fill")
-                Text("HINT")
-                    .fontWeight(.medium)
-            }
-        }
-        .foregroundColor(.white)
-        .padding()
-        .background(Color.KEYBOARD)
-        .clipShape(Capsule())
-    }
-}
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.accentColor.ignoresSafeArea()
+            Color.BG.ignoresSafeArea()
             ContentView()
                 .environmentObject(WordleViewModel())
                 .environmentObject(ErrorViewModel())

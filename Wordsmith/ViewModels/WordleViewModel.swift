@@ -111,9 +111,36 @@ class WordleViewModel: ObservableObject {
         return word.toString() == wordle
     }
     
+    func getHint() {
+        if let hint = self.hint {
+            currentAttempt[hint.0] = Letter(hint.1, isHint: true)
+            return
+        }
+        // look through past attempts to see which letters are still needed
+        var uselessHints = Set<Int>()
+        for attempt in attempts {
+            for (index, letter) in Array(zip(attempt.indices, attempt)) {
+                if letter.color == .PERFECT {
+                    uselessHints.insert(index)
+                }
+            }
+        }
+        
+        let usefulHints = Set(0...4).subtracting(uselessHints)
+        
+        // randomly choose one of them and insert into current attempt
+        let randIndex = usefulHints.randomElement()!
+        let hint = String(wordle[randIndex])
+        
+        currentAttempt[randIndex] = Letter(hint, isHint: true)
+        self.hint = (randIndex, hint)
+        
+    }
+    
     func reset() {
         currentAttempt = Array(repeating: nil, count: Game.numLetters)
         attempts = []
+        hint = nil
         Keyboard.shared.reset()
         wordle = Game.wordles.randomElement()!
         previousBest = max(previousBest, currentStreak)

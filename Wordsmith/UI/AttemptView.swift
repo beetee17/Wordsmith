@@ -15,12 +15,15 @@ struct AttemptView: View {
     var body: some View {
         
         ForEach(0...Game.numLetters-1, id: \.self) { i in
+            let letter = attempt[i]
             if isSelectable {
                 Button(action: { viewModel.updateSelection(to: i, action: .None) }) {
-                    LetterView(letter: attempt[i], isSelected: viewModel.selection == i)
+                    LetterView(letter: letter, isSelected: viewModel.selection == i)
+                    
+                        .if(letter?.isHint ?? false) { $0.pulseEffect() }
                 }
             } else {
-                LetterView(letter: attempt[i], isSelected: false)
+                LetterView(letter: letter, isSelected: false)
             }
         }
     }
@@ -29,7 +32,7 @@ struct AttemptView: View {
 struct AttemptView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color.accentColor
+            Color.BG
             AttemptView(attempt: [], isSelectable: true).environmentObject(WordleViewModel())
         }
     }

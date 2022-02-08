@@ -13,10 +13,12 @@ class Letter: Identifiable {
     var string: String
     var color: Color? = nil
     var id = UUID()
+    var isHint: Bool
     
-    init(_ letter: String, color: Color? = nil) {
+    init(_ letter: String, color: Color? = nil, isHint: Bool = false) {
         self.string = letter.lowercased()
         self.color = color
+        self.isHint = isHint
     }
 }
 
