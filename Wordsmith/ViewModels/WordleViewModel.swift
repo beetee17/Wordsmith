@@ -17,6 +17,19 @@ class WordleViewModel: ObservableObject {
     @Published var lastEditAction: EditAction = .None
     
     @Published var wordle: String = Game.wordles.randomElement()!
+    @Published var hint: (Int, String)? = nil
+    
+    static var preview: WordleViewModel {
+        let vm = WordleViewModel()
+        let wordle = "black"
+        vm.wordle = wordle
+        vm.attempts = [.init("rates", wordle: wordle),
+                       .init("allow", wordle: wordle),
+                       .init("pluck", wordle: wordle),
+                       .init("black", wordle: wordle)]
+        vm.selection = -1
+        return vm
+    }
     
     var currentStreak = Player.currStreak {
         didSet {

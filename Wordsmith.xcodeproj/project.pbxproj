@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C9FEE4D27B0D06600BAA732 /* HintButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9FEE4C27B0D06600BAA732 /* HintButton.swift */; };
 		6CB6639E27ACEA11001770DE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638327ACEA11001770DE /* StatisticsView.swift */; };
 		6CB6639F27ACEA11001770DE /* AttemptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638427ACEA11001770DE /* AttemptView.swift */; };
 		6CB663A027ACEA11001770DE /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6638527ACEA11001770DE /* DebugView.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C9FEE4C27B0D06600BAA732 /* HintButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintButton.swift; sourceTree = "<group>"; };
 		6CB6636B27ACE9D0001770DE /* Wordsmith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wordsmith.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CB6638327ACEA11001770DE /* StatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		6CB6638427ACEA11001770DE /* AttemptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				6CB6638827ACEA11001770DE /* TutorialView.swift */,
 				6CB6638927ACEA11001770DE /* GridView.swift */,
 				6CB6638A27ACEA11001770DE /* ContentView.swift */,
+				6C9FEE4C27B0D06600BAA732 /* HintButton.swift */,
 				6CB6638B27ACEA11001770DE /* LetterView.swift */,
 			);
 			path = UI;
@@ -240,6 +243,7 @@
 				6CB663A227ACEA11001770DE /* TopBar.swift in Sources */,
 				6CB663A027ACEA11001770DE /* DebugView.swift in Sources */,
 				6CB6639E27ACEA11001770DE /* StatisticsView.swift in Sources */,
+				6C9FEE4D27B0D06600BAA732 /* HintButton.swift in Sources */,
 				6CB663A327ACEA11001770DE /* TutorialView.swift in Sources */,
 				6CB663B927AD32C5001770DE /* GameCenter.swift in Sources */,
 				6CB663A127ACEA11001770DE /* KeyboardView.swift in Sources */,
@@ -385,7 +389,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wordsmith/Preview Content\"";
 				DEVELOPMENT_TEAM = M9BZ2GV933;
 				ENABLE_PREVIEWS = YES;
@@ -403,7 +407,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = brandonthio.Wordsmith;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -418,7 +422,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Wordsmith/Preview Content\"";
 				DEVELOPMENT_TEAM = M9BZ2GV933;
 				ENABLE_PREVIEWS = YES;
@@ -436,7 +440,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = brandonthio.Wordsmith;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

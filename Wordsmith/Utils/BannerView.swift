@@ -16,7 +16,7 @@ struct BannerView: View {
             
             VStack(alignment: .leading, spacing:10) {
                 HStack {
-                    Image(systemName: "square.fill")
+                    Image("icon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width:25, height: 25)
@@ -39,9 +39,9 @@ struct BannerView: View {
         .frame(width: Device.width-40, alignment: .leading)
         .background(
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.03205184274, green: 0.03314970656, blue: 0.04729758212, alpha: 1)).opacity(0.5), Color.accentColor.opacity(0.7)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.03205184274, green: 0.03314970656, blue: 0.04729758212, alpha: 1)).opacity(0.5), Color.BG.opacity(0.7)]), startPoint: .top, endPoint: .bottom)
             
-                LinearGradient(gradient: Gradient(colors: [Color.accentColor.opacity(0.6), Color(#colorLiteral(red: 0.07820445112, green: 0.08963582299, blue: 0.09931479403, alpha: 1)).opacity(0.6)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color.BG.opacity(0.6), Color(#colorLiteral(red: 0.07820445112, green: 0.08963582299, blue: 0.09931479403, alpha: 1)).opacity(0.6)]), startPoint: .top, endPoint: .bottom)
             
             Color.black.opacity(0.4)
             }

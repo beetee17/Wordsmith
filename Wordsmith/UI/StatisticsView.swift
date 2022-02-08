@@ -38,7 +38,7 @@ struct StatisticsView: View {
             }
             .frame(width: Device.width*0.85)
             .padding()
-            .background(Color.accentColor)
+            .background(Color.BG)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .overlay(
                 Button(action: { withAnimation { isPresented = false } }) {
@@ -50,7 +50,7 @@ struct StatisticsView: View {
                         .padding(.top, 10)
                 }, alignment: .topTrailing)
             
-            .shadow(color: .accentColor, radius: 5)
+            .shadow(color: .BG, radius: 5)
         }
         
     }
