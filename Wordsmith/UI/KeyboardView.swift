@@ -77,7 +77,7 @@ struct KeyboardView: View {
                 }
             }
         }
-        .padding(.horizontal, 5)
+        .padding(5)
     }
 }
 

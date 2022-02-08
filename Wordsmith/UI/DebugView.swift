@@ -48,7 +48,7 @@ struct DebugView: View {
             
         }
         .padding(.horizontal)
-        .background(Color.accentColor.opacity(0.7))
+        .background(Color.BG.opacity(0.7))
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
