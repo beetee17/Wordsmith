@@ -18,14 +18,11 @@ struct ContentView: View {
     
     @State private var showStats = false
     @State private var showTutorial = false
-    @State private var definitionToShow = ""
-    @State private var showDefinition = false
-    @State private var showLeaderboards = false
     
     var body: some View {
-        if showLeaderboards {
+        if viewModel.showLeaderboards {
             
-            GKLeaderboardView(isShowing: $showLeaderboards)
+            GKLeaderboardView(isShowing: $viewModel.showLeaderboards)
                 .transition(.move(edge: .bottom))
                 
         } else {
@@ -41,14 +38,13 @@ struct ContentView: View {
                     VStack {
                         TopBar(showStats: $showStats,
                                showTutorial: $showTutorial,
-                               showLeaderboards: $showLeaderboards)
+                               showLeaderboards: $viewModel.showLeaderboards)
                         GridView()
                     }.extractGeometry { frame in topSize = frame.height }
                     
                     
                     
-                    HintButton(action: viewModel.getHint).frame(height: availableSize - (topSize + bottomSize))
-                    
+                    HintButton(action: viewModel.getHint).frame(height: availableSize - (topSize + bottomSize + 10))
                     
                     
                     KeyboardView().extractGeometry { frame in bottomSize = frame.height }
@@ -69,48 +65,10 @@ struct ContentView: View {
                 }
             }
             .banner(isPresented: $errorHandler.bannerIsShown, title: errorHandler.bannerTitle, message: errorHandler.bannerMessage)
-            .onChange(of: errorHandler.alertIsShown) { alertIsShown in
-                if alertIsShown {
-                    showAlert()
-                }
-            }
-            .sheet(isPresented: $showDefinition) {
-                DefinitionView(word: definitionToShow)
+            .sheet(isPresented: $viewModel.showDefinition) {
+                DefinitionView(word: viewModel.definitionToShow)
             }
             //        .overlay(DebugView(), alignment: .trailing)
-        }
-    }
-    
-    private func showAlert() {
-        
-        let alert =  UIAlertController(title: errorHandler.alertTitle,
-                                       message: errorHandler.alertMessage,
-                                       preferredStyle: .alert)
-        
-        let showDefinition = UIAlertAction(title: "Lookup '\(viewModel.wordle.capitalized)'", style: .default) { (action) in
-            self.definitionToShow = viewModel.wordle
-            self.showDefinition = true
-            errorHandler.alertAction()
-            errorHandler.alertIsShown = false
-        }
-        
-        let showLeaderboards = UIAlertAction(title: "View Leaderboards", style: .default) { (action) in
-            self.showLeaderboards = true
-            errorHandler.alertAction()
-            errorHandler.alertIsShown = false
-        }
-        
-        let dismiss = UIAlertAction(title: "Continue", style: .cancel) { (action) in
-            errorHandler.alertAction()
-            errorHandler.alertIsShown = false
-        }
-        
-        alert.addAction(showDefinition)
-        alert.addAction(showLeaderboards)
-        alert.addAction(dismiss)
-        
-        DispatchQueue.main.async {
-            window?.rootViewController?.present(alert, animated: true, completion: nil)
         }
     }
 }

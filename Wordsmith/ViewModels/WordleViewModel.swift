@@ -19,6 +19,10 @@ class WordleViewModel: ObservableObject {
     @Published var wordle: String = Game.wordles.randomElement()!
     @Published var hint: (Int, String)? = nil
     
+    @Published var definitionToShow = ""
+    @Published var showDefinition = false
+    @Published var showLeaderboards = false
+    
     static var preview: WordleViewModel {
         let vm = WordleViewModel()
         let wordle = "black"
@@ -78,17 +82,17 @@ class WordleViewModel: ObservableObject {
     }
     
     func surrender() {
-        let alertTitle = "STREAK LOST"
-        let alertMessage = "\nPrevious Best: \(previousBest) \n\nThe word was \(wordle.capitalized)"
-        ErrorViewModel.shared.showAlert(alertTitle, alertMessage) {
-            Player.incrementNumPlayed()
-            self.currentStreak = 0
-            self.reset()
-            
+        
+        let alertTitle = "Give Up"
+        let alertMessage = "Are you sure you want to skip this word?"
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
+            ErrorViewModel.shared.alertIsShown = false
+            self.showPlayerLostAlert()
         }
+        
+        ErrorViewModel.shared.showAlert(alertTitle, alertMessage, [confirmAction, cancelButton(title: "Cancel", { })])
     
-        self.currentAttempt = Array(repeating: nil, count: Game.numLetters)
-        self.updateSelection(to: 0, action: .None)
 
     }
     
@@ -103,28 +107,11 @@ class WordleViewModel: ObservableObject {
         Player.updateGuesses(with: currentAttempt.toString())
         
         if isCorrect(currentAttempt) {
-            let alertTitle = "WELL DONE"
-            let alertMessage = "\n\(wordle.capitalized) found in \(attempts.count) turns"
-            
-            ErrorViewModel.shared.showAlert(alertTitle, alertMessage) {
-                Player.incrementNumPlayed()
-                Player.updateGuessDistribution(with: self.attempts.count)
-                self.currentStreak += 1
-                self.reset()
-                
-            }
-            
+            showPlayerWonAlert()
             
         } else if attempts.count >= Game.maxAttempts {
             // Player is out of attempts
-            let alertTitle = "STREAK LOST"
-            let alertMessage = "\nPrevious Best: \(previousBest) \n\nThe word was \(wordle.capitalized)"
-            ErrorViewModel.shared.showAlert(alertTitle, alertMessage) {
-                Player.incrementNumPlayed()
-                self.currentStreak = 0
-                self.reset()
-                
-            }
+            showPlayerLostAlert()
         }
         
         self.currentAttempt = Array(repeating: nil, count: Game.numLetters)
@@ -182,4 +169,62 @@ class WordleViewModel: ObservableObject {
         wordle = Game.wordles.randomElement()!
         previousBest = max(previousBest, currentStreak)
     }
+}
+
+// MARK: - Alert Handling
+extension WordleViewModel {
+    
+    func definitionAction(_ completion: @escaping () -> Void) -> UIAlertAction {
+        return UIAlertAction(title: "Lookup '\(self.wordle.capitalized)'", style: .default) { (action) in
+            self.definitionToShow = self.wordle
+            self.showDefinition = true
+            completion()
+            ErrorViewModel.shared.alertIsShown = false
+        }
+        
+    }
+    
+    func leaderboardAction(_ completion: @escaping () -> Void) -> UIAlertAction {
+        return UIAlertAction(title: "View Leaderboards", style: .default) { (action) in
+            self.showLeaderboards = true
+            completion()
+            ErrorViewModel.shared.alertIsShown = false
+        }
+    }
+    
+    func cancelButton(title: String = "Continue", _ completion: @escaping () -> Void) -> UIAlertAction {
+        return UIAlertAction(title: title, style: .cancel) { (action) in
+            completion()
+            ErrorViewModel.shared.alertIsShown = false
+        }
+    }
+    
+    func showPlayerWonAlert() {
+        let alertTitle = "WELL DONE"
+        let alertMessage = "\n\(wordle.capitalized) found in \(attempts.count) turns"
+        
+        let cancelAction =  {
+            Player.incrementNumPlayed()
+            Player.updateGuessDistribution(with: self.attempts.count)
+            self.currentStreak += 1
+            self.reset()
+        }
+     
+        ErrorViewModel.shared.showAlert(alertTitle, alertMessage, [definitionAction(cancelAction), leaderboardAction(cancelAction), cancelButton(cancelAction)])
+    }
+    
+    func showPlayerLostAlert() {
+        // Player is out of attempts
+        let alertTitle = "STREAK LOST"
+        let alertMessage = "\nPrevious Best: \(previousBest) \n\nThe word was \(wordle.capitalized)"
+        
+        let cancelAction = {
+            Player.incrementNumPlayed()
+            self.currentStreak = 0
+            self.reset()
+        }
+        
+        ErrorViewModel.shared.showAlert(alertTitle, alertMessage, [definitionAction(cancelAction), leaderboardAction(cancelAction), cancelButton(cancelAction)])
+    }
+    
 }

@@ -38,13 +38,20 @@ class ErrorViewModel: NSObject, ObservableObject {
     /// - Parameters:
     ///   - title: The title of the notification
     ///   - message: The message of the notification
-    func showAlert(_ title: String, _ message: String, _ action: @escaping () -> Void) {
+    func showAlert(_ title: String, _ message: String, _ actions: [UIAlertAction]) {
         guard !alertIsShown else { return }
         
-        alertTitle = title
-        alertMessage = message
-        alertAction = action
+        let alert =  UIAlertController(title: title,
+                                       message: message,
+                                       preferredStyle: .alert)
+        
+        for action in actions {
+            alert.addAction(action)
+        }
         alertIsShown = true
+        DispatchQueue.main.async {
+            window?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
         
     }
     
