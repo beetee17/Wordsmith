@@ -63,14 +63,15 @@ class WordleViewModel: ObservableObject {
     
     func incrementSelection() {
         if lastEditAction == .Insert {
-            selection = min(selection+2, Game.numLetters)
+            selection = min(selection+2, Game.numLetters - 1)
         } else {
-            selection = min(selection+1, Game.numLetters)
+            selection = min(selection+1, Game.numLetters - 1)
         }
         lastEditAction = .None
     }
     
     func addChar(_ char: Letter) {
+        // TODO: Make selection look like it moves to next blank cell
         updateSelection(to: selection+1, action: .Insert)
         currentAttempt[selection] = char
         
