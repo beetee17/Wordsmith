@@ -47,7 +47,8 @@ struct ContentView: View {
                     HintButton(action: viewModel.getHint).frame(height: availableSize - (topSize + bottomSize + 10))
                     
                     
-                    KeyboardView().extractGeometry { frame in bottomSize = frame.height }
+                    KeyboardView()
+                        .extractGeometry { frame in bottomSize = frame.height }
                     
         
                 }

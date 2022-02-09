@@ -21,7 +21,7 @@ struct LetterView: View {
         
         ZStack {
             letterShape
-                .stroke(getBorderColor(), lineWidth: 2)
+                .stroke(getBorderColor(), lineWidth: isSelected ? 2.5 : 2)
                 .background(letterShape.fill(color ?? Color.clear))
                 .foregroundColor(color ?? .clear)
                 .frame(width: size, height: size)
@@ -51,10 +51,10 @@ struct LetterView: View {
             return .PERFECT
         }
         guard !isSelected else {
-            return .white
+            return .white.opacity(0.8)
         }
         guard let letter = letter else {
-            return .secondary
+            return .secondary.opacity(0.3)
         }
         guard let color = letter.color else {
             return .white.opacity(0.8)
