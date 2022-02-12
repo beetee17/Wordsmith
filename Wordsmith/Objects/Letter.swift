@@ -23,11 +23,11 @@ class Letter: Identifiable {
 }
 
 extension Array where Element == Letter {
-    func setColor(for wordle: String) {
+    func setColor(for answer: String) {
         guard self.count == 5 else { return }
       
         var lettersLeft = [String]()
-        let wordle = wordle.reduce(into: Array<String>()) { (res, letter) in
+        let answer = answer.reduce(into: Array<String>()) { (res, letter) in
             res.append(String(letter))
             lettersLeft.append(String(letter))
             
@@ -36,14 +36,14 @@ extension Array where Element == Letter {
         for index in self.indices {
             let letter = self[index].string
             
-            if letter == wordle[index] {
+            if letter == answer[index] {
                 self[index].color = .PERFECT
     
                 if let searchResult = lettersLeft.firstIndex(of: letter) {
                     lettersLeft.remove(at: searchResult)
                 }
                 
-            } else if wordle.contains(letter) {
+            } else if answer.contains(letter) {
                 self[index].color = .ALMOST
             } else {
                 self[index].color = .WRONG

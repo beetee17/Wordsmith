@@ -8,29 +8,30 @@
 import Foundation
 import SwiftUI
 
-class WordleViewModel: ObservableObject {
+class WordSmithViewModel: ObservableObject {
     
     @Published var attempts: [[Letter]] = []
-    @Published var currentAttempt: [Letter?] = Array(repeating: nil, count: Game.numLetters)
+    @Published var currentAttempt: [Letter?] = Array(repeating: nil, count: Global.numLetters)
     
     @Published var selection = 0
     @Published var lastEditAction: EditAction = .None
     
-    @Published var wordle: String = Game.wordles.randomElement()!
+    @Published var answer: String = Global.answers.randomElement()!
     @Published var hint: (Int, String)? = nil
     
     @Published var definitionToShow = ""
     @Published var showDefinition = false
     @Published var showLeaderboards = false
     
-    static var preview: WordleViewModel {
-        let vm = WordleViewModel()
-        let wordle = "black"
-        vm.wordle = wordle
-        vm.attempts = [.init("rates", wordle: wordle),
-                       .init("allow", wordle: wordle),
-                       .init("pluck", wordle: wordle),
-                       .init("black", wordle: wordle)]
+    static var preview: WordSmithViewModel {
+        let vm = WordSmithViewModel()
+        let answer = "black"
+        vm.answer = answer
+        vm.currentStreak = 10
+        vm.attempts = [.init("rates", answer: answer),
+                       .init("allow", answer: answer),
+                       .init("pluck", answer: answer),
+                       .init("black", answer: answer)]
         vm.selection = -1
         return vm
     }
@@ -49,7 +50,7 @@ class WordleViewModel: ObservableObject {
     }
     
     func updateSelection(to newValue: Int, action: EditAction) {
-        guard newValue >= 0 && newValue < Game.numLetters else {
+        guard newValue >= 0 && newValue < Global.numLetters else {
             lastEditAction = action
             return
         }
@@ -63,9 +64,9 @@ class WordleViewModel: ObservableObject {
     
     func incrementSelection() {
         if lastEditAction == .Insert {
-            selection = min(selection+2, Game.numLetters - 1)
+            selection = min(selection+2, Global.numLetters - 1)
         } else {
-            selection = min(selection+1, Game.numLetters - 1)
+            selection = min(selection+1, Global.numLetters - 1)
         }
         lastEditAction = .None
     }
@@ -85,7 +86,7 @@ class WordleViewModel: ObservableObject {
     func surrender() {
         
         let alertTitle = "Give Up"
-        let alertMessage = "Are you sure you want to skip this word?"
+        let alertMessage = "Are you sure you want to skip this word? Your current streak will be lost."
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
             ErrorViewModel.shared.alertIsShown = false
@@ -99,10 +100,10 @@ class WordleViewModel: ObservableObject {
     
     func confirmAttempt() {
         let currentAttempt = currentAttempt.compactMap({$0})
-        guard currentAttempt.count == Game.numLetters else { return }
+        guard currentAttempt.count == Global.numLetters else { return }
         guard isWord(currentAttempt) else { return }
             
-        currentAttempt.setColor(for: wordle)
+        currentAttempt.setColor(for: answer)
         Keyboard.shared.updateColors(for: currentAttempt)
         attempts.append(currentAttempt)
         Player.updateGuesses(with: currentAttempt.toString())
@@ -110,18 +111,18 @@ class WordleViewModel: ObservableObject {
         if isCorrect(currentAttempt) {
             showPlayerWonAlert()
             
-        } else if attempts.count >= Game.maxAttempts {
+        } else if attempts.count >= Global.maxAttempts {
             // Player is out of attempts
             showPlayerLostAlert()
         }
         
-        self.currentAttempt = Array(repeating: nil, count: Game.numLetters)
+        self.currentAttempt = Array(repeating: nil, count: Global.numLetters)
         self.updateSelection(to: 0, action: .None)
     }
     
     func isWord(_ word: [Letter]) -> Bool {
         let word = word.toString()
-        guard Game.dictionary.search(element: word) != -1 else {
+        guard Global.dictionary.search(element: word) != -1 else {
             ErrorViewModel.shared.showBanner(title: "Invalid Attempt",
                                              message: "\(word.capitalized) is not a word!")
             return false
@@ -133,7 +134,7 @@ class WordleViewModel: ObservableObject {
     func isCorrect(_ word: [Letter]) -> Bool {
         // check if valid word
         print("CORRECT")
-        return word.toString() == wordle
+        return word.toString() == answer
     }
     
     func getHint() {
@@ -155,7 +156,7 @@ class WordleViewModel: ObservableObject {
         
         // randomly choose one of them and insert into current attempt
         let randIndex = usefulHints.randomElement()!
-        let hint = String(wordle[randIndex])
+        let hint = String(answer[randIndex])
         
         currentAttempt[randIndex] = Letter(hint, isHint: true)
         self.hint = (randIndex, hint)
@@ -163,21 +164,21 @@ class WordleViewModel: ObservableObject {
     }
     
     func reset() {
-        currentAttempt = Array(repeating: nil, count: Game.numLetters)
+        currentAttempt = Array(repeating: nil, count: Global.numLetters)
         attempts = []
         hint = nil
         Keyboard.shared.reset()
-        wordle = Game.wordles.randomElement()!
+        answer = Global.answers.randomElement()!
         previousBest = max(previousBest, currentStreak)
     }
 }
 
 // MARK: - Alert Handling
-extension WordleViewModel {
+extension WordSmithViewModel {
     
     func definitionAction(_ completion: @escaping () -> Void) -> UIAlertAction {
-        return UIAlertAction(title: "Lookup '\(self.wordle.capitalized)'", style: .default) { (action) in
-            self.definitionToShow = self.wordle
+        return UIAlertAction(title: "Lookup '\(self.answer.capitalized)'", style: .default) { (action) in
+            self.definitionToShow = self.answer
             self.showDefinition = true
             completion()
             ErrorViewModel.shared.alertIsShown = false
@@ -202,7 +203,7 @@ extension WordleViewModel {
     
     func showPlayerWonAlert() {
         let alertTitle = "WELL DONE"
-        let alertMessage = "\n\(wordle.capitalized) found in \(attempts.count) turns"
+        let alertMessage = "\n\(answer.capitalized) found in \(attempts.count) turns"
         
         let cancelAction =  {
             Player.incrementNumPlayed()
@@ -217,7 +218,7 @@ extension WordleViewModel {
     func showPlayerLostAlert() {
         // Player is out of attempts
         let alertTitle = "STREAK LOST"
-        let alertMessage = "\nPrevious Best: \(previousBest) \n\nThe word was \(wordle.capitalized)"
+        let alertMessage = "\nPrevious Best: \(previousBest) \n\nThe word was \(answer.capitalized)"
         
         let cancelAction = {
             Player.incrementNumPlayed()
