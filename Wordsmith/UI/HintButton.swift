@@ -35,12 +35,9 @@ struct DarkButtonStyle: ButtonStyle {
         configuration.label
             .padding(20)
             .foregroundColor(.yellow)
-            .background(
-                Color.HINT
-//                DarkBackground(isHighlighted: configuration.isPressed, shape: Capsule())
-            )
+            .background(Color.HINT)
             .clipShape(Capsule())
-        
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(nil)
     }
 }

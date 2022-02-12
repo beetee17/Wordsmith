@@ -19,6 +19,12 @@ extension KeyValuePair {
     @NSManaged public var key_: String?
     @NSManaged public var value_: Int64
     
+    convenience init(context: NSManagedObjectContext, key: String, value: Int = 0) {
+        self.init(context: context)
+        self.key = key
+        self.value = value
+    }
+    
     var key: String {
         get {
             return key_ ?? "UNKNOWN KEY"

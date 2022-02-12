@@ -13,7 +13,7 @@ struct LetterView: View {
     var letter: Letter?
     var isSelected: Bool
     var animationDuration = 0.2
-    let size = Device.height < 800 ? 58 : min(90, Device.width/6.4)
+    var size: CGFloat 
     let letterShape = RoundedRectangle(cornerRadius: 10)
     
     var body: some View {
@@ -67,7 +67,7 @@ struct LetterView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.BG
-            LetterView(letter: nil, isSelected: true)
+            LetterView(letter: nil, isSelected: true, size: 60)
         }
     }
 }

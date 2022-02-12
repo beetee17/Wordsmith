@@ -23,8 +23,8 @@ class Letter: Identifiable {
 }
 
 extension Array where Element == Letter {
-    func setColor(for answer: String) {
-        guard self.count == 5 else { return }
+    func setColor(for answer: String, numLetters: Int) {
+        guard self.count == numLetters else { return }
       
         var lettersLeft = [String]()
         let answer = answer.reduce(into: Array<String>()) { (res, letter) in

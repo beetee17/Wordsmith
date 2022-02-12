@@ -9,13 +9,13 @@ import SwiftUI
 
 struct GridView: View {
     @EnvironmentObject var viewModel: WordSmithViewModel
-    let columns: [GridItem] = Array(repeating: .init(.flexible()),
-                                    count: Global.numLetters)
     
     var body: some View {
         let attempts = viewModel.attempts
         let currentAttempt = viewModel.currentAttempt
-        
+        let numLetters = viewModel.game.numLetters
+        let columns: [GridItem] = Array(repeating: .init(.flexible()),
+                                        count: numLetters)
         VStack {
             ForEach(0...Global.maxAttempts-1, id: \.self) { i in
                 LazyVGrid(columns: columns) {
@@ -27,7 +27,7 @@ struct GridView: View {
                                     isSelectable: true)
                     } else {
                         AttemptView(attempt: Array(repeating: nil,
-                                                   count: Global.numLetters),
+                                                   count: numLetters),
                                     isSelectable: false)
                     }
                     
@@ -35,7 +35,7 @@ struct GridView: View {
                 .padding(.horizontal, 10)
             }
         }
-        .frame(maxWidth: 550)
+        .frame(maxWidth: 600 + CGFloat((numLetters - 5)*100))
     }
 }
 

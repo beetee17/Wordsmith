@@ -33,13 +33,15 @@ struct DebugView: View {
                     .font(.title2)
                     .textCase(.uppercase)
                 }
-//                Text(viewModel.answer)
-//                    .font(.title2)
-//                    .textCase(.uppercase)
-//                    .padding(.top)
-//                    .fixedSize(horizontal: false, vertical: true)
+                Text(viewModel.answer)
+                    .foregroundColor(.TEXT)
+                    .font(.title2)
+                    .textCase(.uppercase)
+                    .padding(.top)
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 Text(viewModel.currentAttempt.toString())
+                    .foregroundColor(.TEXT)
                     .font(.title2)
                     .textCase(.uppercase)
                     .padding(.top)
@@ -47,6 +49,7 @@ struct DebugView: View {
             }
             
         }
+        .foregroundColor(.TEXT)
         .padding(.horizontal)
         .background(Color.BG.opacity(0.7))
         .clipShape(RoundedRectangle(cornerRadius: 15))
