@@ -10,7 +10,7 @@ import SwiftUI
 struct TutorialView: View {
     @Binding var isPresented: Bool
     let columns: [GridItem] = Array(repeating: .init(.flexible()),
-                                    count: Global.numLetters)
+                                    count: 5)
     let answer = "words"
     let fontSize = Device.width*0.025
     
@@ -86,6 +86,7 @@ struct TutorialView: View {
                 .frame(maxWidth: 550)
             }
             .padding(.top, 10)
+            .buttonStyle(ScaleEffect())
         }
     }
     
@@ -94,7 +95,7 @@ struct TutorialView: View {
         for char in word {
             attempt.append(Letter(String(char)))
         }
-        attempt.setColor(for: answer)
+        attempt.setColor(for: answer, numLetters: 5)
         return attempt
     }
 }
