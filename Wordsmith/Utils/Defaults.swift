@@ -13,9 +13,9 @@ struct Device {
     static let height = UIScreen.main.bounds.height
 }
 
-struct Game {
+struct Global {
     static let dictionary = loadWords("words")
-    static let wordles = loadWords("wordles")
+    static let answers = loadWords("answers")
     static let maxAttempts = 6
     static let numLetters = 5
     

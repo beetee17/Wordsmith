@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct AttemptView: View {
-    @EnvironmentObject var viewModel: WordleViewModel
+    @EnvironmentObject var viewModel: WordSmithViewModel
     var attempt: [Letter?]
     var isSelectable: Bool
     
     var body: some View {
         
-        ForEach(0...Game.numLetters-1, id: \.self) { i in
+        ForEach(0...Global.numLetters-1, id: \.self) { i in
             let letter = attempt[i]
             if isSelectable {
                 Button(action: { viewModel.updateSelection(to: i, action: .None) }) {
@@ -33,7 +33,7 @@ struct AttemptView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.BG
-            AttemptView(attempt: [], isSelectable: true).environmentObject(WordleViewModel())
+            AttemptView(attempt: [], isSelectable: true).environmentObject(WordSmithViewModel())
         }
     }
 }

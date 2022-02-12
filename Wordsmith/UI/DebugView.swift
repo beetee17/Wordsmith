@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DebugView: View {
     
-    @EnvironmentObject var viewModel: WordleViewModel
+    @EnvironmentObject var viewModel: WordSmithViewModel
     
     var body: some View {
         ZStack {
@@ -22,7 +22,7 @@ struct DebugView: View {
                     .font(.system(size: 20, weight: .heavy, design: .default))
                     .padding(.bottom)
                 
-                ForEach(0..<Game.maxAttempts, id: \.self) { i in
+                ForEach(0..<Global.maxAttempts, id: \.self) { i in
                     HStack {
                         Text("\(i+1). ")
                             .frame(width:20)
@@ -33,7 +33,7 @@ struct DebugView: View {
                     .font(.title2)
                     .textCase(.uppercase)
                 }
-//                Text(viewModel.wordle)
+//                Text(viewModel.answer)
 //                    .font(.title2)
 //                    .textCase(.uppercase)
 //                    .padding(.top)
@@ -55,6 +55,6 @@ struct DebugView: View {
 
 struct DebugView_Previews: PreviewProvider {
     static var previews: some View {
-        DebugView().environmentObject(WordleViewModel())
+        DebugView().environmentObject(WordSmithViewModel())
     }
 }
