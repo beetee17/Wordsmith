@@ -75,7 +75,7 @@ extension Array where Element == Letter {
             self.append(letter)
         }
         if let answer = answer {
-            self.setColor(for: answer)
+            self.setColor(for: answer, numLetters: answer.count)
         }
     }
 }
@@ -124,7 +124,6 @@ extension Array where Element: Comparable {
 }
 
 struct PulseEffect: ViewModifier {
-
     @State var isOn = false
     var animation = Animation.easeInOut(duration: 0.7).repeatForever(autoreverses: true)
     
@@ -140,14 +139,23 @@ struct PulseEffect: ViewModifier {
 }
 
 struct GeometryExtractor: ViewModifier {
+    @Binding var value: Bool
     var completion: (CGRect) -> Void
     
     func body(content: Content) -> some View {
         content
             .background(GeometryReader{ geo in
                 Color.clear
-                    .onAppear(perform: { completion(geo.frame(in: .global)) })
+                    .onAppear { completion(geo.frame(in: .global)) }
+                    .onChange(of: value, perform: { val in completion(geo.frame(in: .global)) })
             })
+    }
+}
+
+struct ScaleEffect: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 1.2 : 1.0)
     }
 }
 
@@ -165,9 +173,5 @@ extension View {
     
     func pulseEffect() -> some View  {
         self.modifier(PulseEffect())
-    }
-    
-    func extractGeometry(_ completion: @escaping (CGRect) -> Void) -> some View  {
-        self.modifier(GeometryExtractor(completion: completion))
     }
 }
