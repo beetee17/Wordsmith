@@ -19,9 +19,53 @@ extension Game {
     @NSManaged public var currStreak_: Int32
     @NSManaged public var prevBest_: Int32
     @NSManaged public var numPlayed_: Int32
-    @NSManaged public var numLetters: Int32
+    @NSManaged public var numLetters_: Int32
     @NSManaged public var numGuesses_: NSSet?
     @NSManaged public var guessHistory_: NSSet?
+    
+    var currStreak: Int {
+        get {
+            return Int(currStreak_)
+        }
+        set {
+            currStreak_ = Int32(newValue)
+        }
+    }
+    var prevBest: Int {
+        get {
+            return Int(prevBest_)
+        }
+        set {
+            prevBest_ = Int32(newValue)
+        }
+    }
+    var numPlayed: Int {
+        get {
+            return Int(numPlayed_)
+        }
+        set {
+            numPlayed_ = Int32(newValue)
+        }
+    }
+    var numLetters: Int {
+        get {
+            return Int(numLetters_)
+        }
+        set {
+            numLetters_ = Int32(newValue)
+        }
+    }
+    var numGuesses: [KeyValuePair] {
+        let array = numGuesses_ as? Set<KeyValuePair> ?? []
+        
+        return array.sorted() { $0.key < $1.key }
+    }
+    
+    var guessHistory: [KeyValuePair] {
+        let array = guessHistory_ as? Set<KeyValuePair> ?? []
+        
+        return array.sorted() { $0.value < $1.value }
+    }
 
 }
 
