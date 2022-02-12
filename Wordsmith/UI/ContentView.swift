@@ -8,16 +8,21 @@
 import SwiftUI
 import CoreData
 
+class ContentViewModel: ObservableObject {
+    @Published var showStats = false
+    @Published var showTutorial = false
+    @Published var availableSize: CGFloat = 0
+    @Published var topSize: CGFloat = 0
+    @Published var bottomSize: CGFloat = 0
+    var hintButtonSize: CGFloat {
+        availableSize - (topSize + bottomSize + 30)
+    }
+}
+
 struct ContentView: View {
-    @EnvironmentObject var viewModel: WordleViewModel
+    @EnvironmentObject var viewModel: WordSmithViewModel
     @EnvironmentObject var errorHandler: ErrorViewModel
-    
-    @State private var topSize: CGFloat = 0
-    @State private var bottomSize: CGFloat = 0
-    @State private var availableSize: CGFloat = 0
-    
-    @State private var showStats = false
-    @State private var showTutorial = false
+    @StateObject var vm = ContentViewModel()
     
     var body: some View {
         if viewModel.showLeaderboards {
@@ -30,37 +35,18 @@ struct ContentView: View {
                 Color.BG
                     .ignoresSafeArea()
                     .extractGeometry { frame in
-                        availableSize = frame.height
+                        vm.availableSize = frame.height
                     }
                 
-                VStack {
-                    
-                    VStack {
-                        TopBar(showStats: $showStats,
-                               showTutorial: $showTutorial,
-                               showLeaderboards: $viewModel.showLeaderboards)
-                        GridView()
-                    }.extractGeometry { frame in topSize = frame.height }
-                    
-                    
-                    
-                    HintButton(action: viewModel.getHint).frame(height: availableSize - (topSize + bottomSize + 10))
-                    
-                    
-                    KeyboardView()
-                        .extractGeometry { frame in bottomSize = frame.height }
-                    
-        
-                }
-                .opacity(showStats ? 0.2 : 1)
+                GameView(vm: vm).opacity(vm.showStats ? 0.2 : 1)
                 
-                if showStats {
-                    StatisticsView(isPresented: $showStats)
+                if vm.showStats {
+                    StatisticsView(isPresented: $vm.showStats)
                         .zIndex(1) // removal transition does not animate when zIndex is not set
                         .transition(.scale)
                 }
-                if showTutorial {
-                    TutorialView(isPresented: $showTutorial)
+                if vm.showTutorial {
+                    TutorialView(isPresented: $vm.showTutorial)
                         .zIndex(1) // removal transition does not animate when zIndex is not set
                         .transition(.scale)
                 }
@@ -76,11 +62,20 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            Color.BG.ignoresSafeArea()
+        Group {
             ContentView()
-                .environmentObject(WordleViewModel())
-                .environmentObject(ErrorViewModel())
+                .previewDevice("iPhone 8 Plus")
+            
+            ContentView()
+                .previewDevice("iPhone 12")
+            
+            ContentView()
+                .previewDevice("iPhone 12 Pro Max")
+            
+            ContentView()
+                .previewDevice("iPad Air (4th generation)")
         }
+        .environmentObject(WordSmithViewModel())
+        .environmentObject(ErrorViewModel())
     }
 }
