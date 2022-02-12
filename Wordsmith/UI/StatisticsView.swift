@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct StatisticsView: View {
+    @EnvironmentObject var viewModel: WordSmithViewModel
     @Binding var isPresented: Bool
     
     var body: some View {
+        let game = viewModel.game
         ZStack {
             Color.white.opacity(0.0001).ignoresSafeArea()
             
@@ -20,22 +22,22 @@ struct StatisticsView: View {
                     .foregroundColor(.TEXT)
                 
                 HStack(alignment: .top) {
-                    let numWins = Float(Player.guessDistribution.values.reduce(0, +))
+                    let numWins = Float(game.getGuessDistribution().values.reduce(0, +))
                     
-                    StatItemView(value: Player.numPlayed,
+                    StatItemView(value: game.numPlayed,
                                  stat: "Played")
                     
-                    StatItemView(value: Int(numWins / Float(max(1, Player.numPlayed)) * 100),
+                    StatItemView(value: Int(numWins / Float(max(1, game.numPlayed)) * 100),
                                  stat: "Win %")
                     
-                    StatItemView(value: Player.currStreak,
+                    StatItemView(value: game.currStreak,
                                  stat: "Current Streak")
                     
-                    StatItemView(value: Player.bestStreak,
+                    StatItemView(value: game.prevBest,
                                  stat: "Best Streak")
                 }
-                GuessDistribution()
-                MostGuessed()
+                GuessDistribution(game: game)
+                MostGuessed(game: game)
             }
             .frame(width: Device.width*0.85)
             .padding()
@@ -57,10 +59,10 @@ struct StatisticsView: View {
     }
 }
 struct GuessDistribution: View {
-    @State private var dict = Player.guessDistribution
+    var game: Game
     
     var body: some View {
-        
+        let dict = game.getGuessDistribution()
         let total = Float(dict.values.reduce(0, +))
         
         VStack(spacing: 5) {
@@ -89,20 +91,11 @@ struct GuessDistribution: View {
     }
 }
 struct MostGuessed: View {
-    @State private var words: [String]
-    
-    init() {
-        let dict = Player.guessHistory
-        guard !dict.isEmpty else {
-            self.words = []
-            return
-        }
-        
-        let sortedDict = dict.sorted {$0.1 > $1.1}
-        self.words = sortedDict[0..<min(5, dict.count)].map({$0.0})
-    }
+    var game: Game
     
     var body: some View {
+        let words = game.getGuessHistory()
+        
         VStack {
             Text("MOST GUESSED")
                 .font(.system(size: 20, weight: .heavy, design: .default))

@@ -7,50 +7,92 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 class WordSmithViewModel: ObservableObject {
-    
-    @Published var attempts: [[Letter]] = []
-    @Published var currentAttempt: [Letter?] = Array(repeating: nil, count: Global.numLetters)
+    @Published var game: Game
+    @Published var attempts: [[Letter]]
+    @Published var currentAttempt: [Letter?]
+    @Published var answers: [String]
     
     @Published var selection = 0
     @Published var lastEditAction: EditAction = .None
     
-    @Published var answer: String = Global.answers.randomElement()!
+    @Published var answer: String
     @Published var hint: (Int, String)? = nil
     
     @Published var definitionToShow = ""
     @Published var showDefinition = false
     @Published var showLeaderboards = false
     
-    static var preview: WordSmithViewModel {
+    init() {
+        var res = moc.safeFetch(Game.fetchRequest(), NSPredicate(format: "numLetters_ == %d", 5)).first
+        if let res = res {
+            self.game = res
+        } else {
+            PersistenceController.initCoreData()
+            res = moc.safeFetch(Game.fetchRequest(), NSPredicate(format: "numLetters_ == %d", 5)).first!
+            self.game = moc.safeFetch(Game.fetchRequest(), NSPredicate(format: "numLetters_ == %d", 5)).first!
+        }
+        
+        self.attempts = []
+        self.currentAttempt = Array(repeating: nil, count: res!.numLetters)
+        
+        let answers = loadWords("\(res!.numLetters)answers")
+        self.answers = answers
+        self.answer = answers.randomElement()!
+    }
+    
+    func setGame(_ game: Game) {
+        self.game = game
+        self.answers = loadWords("\(game.numLetters)answers")
+        self.reset()
+    }
+    
+    static func preview(numLetters: Int = 5) -> WordSmithViewModel{
         let vm = WordSmithViewModel()
-        let answer = "black"
-        vm.answer = answer
-        vm.currentStreak = 10
-        vm.attempts = [.init("rates", answer: answer),
-                       .init("allow", answer: answer),
-                       .init("pluck", answer: answer),
-                       .init("black", answer: answer)]
+        vm.setGame(moc_preview.safeFetch(Game.fetchRequest(), NSPredicate(format: "numLetters_ == %d", numLetters)).first!)
+        if numLetters == 5 {
+            let answer = "black"
+            vm.answer = answer
+            vm.attempts = [.init("rates", answer: answer),
+                           .init("allow", answer: answer),
+                           .init("pluck", answer: answer),
+                           .init("black", answer: answer)]
+            for attempt in vm.attempts {
+                Keyboard.shared.updateColors(for: attempt)
+            }
+            
+        } else if numLetters == 6 {
+            let answer = "broken"
+            vm.answer = answer
+            vm.attempts = [.init("create", answer: answer),
+                           .init("driver", answer: answer),
+                           .init("breath", answer: answer),
+                           .init("spoken", answer: answer),
+                           .init("broken", answer: answer)]
+            for attempt in vm.attempts {
+                Keyboard.shared.updateColors(for: attempt)
+            }
+
+        } else if numLetters == 7 {
+            let answer = "digital"
+            vm.answer = answer
+            vm.attempts = [.init("failing", answer: answer),
+                           .init("billion", answer: answer),
+                           .init("desktop", answer: answer),
+                           .init("digital", answer: answer)]
+            for attempt in vm.attempts {
+                Keyboard.shared.updateColors(for: attempt)
+            }
+        }
+        
         vm.selection = -1
         return vm
     }
     
-    var currentStreak = Player.currStreak {
-        didSet {
-            UserDefaults.standard.set(currentStreak, forKey: "Current Win Streak")
-        }
-    }
-    
-    var previousBest = Player.bestStreak {
-        didSet {
-            UserDefaults.standard.set(previousBest, forKey: "Previous Best")
-            GameCenter.submitScore(of: previousBest, to: .LongestStreak)
-        }
-    }
-    
     func updateSelection(to newValue: Int, action: EditAction) {
-        guard newValue >= 0 && newValue < Global.numLetters else {
+        guard newValue >= 0 && newValue < game.numLetters else {
             lastEditAction = action
             return
         }
@@ -64,9 +106,9 @@ class WordSmithViewModel: ObservableObject {
     
     func incrementSelection() {
         if lastEditAction == .Insert {
-            selection = min(selection+2, Global.numLetters - 1)
+            selection = min(selection+2, game.numLetters - 1)
         } else {
-            selection = min(selection+1, Global.numLetters - 1)
+            selection = min(selection+1, game.numLetters - 1)
         }
         lastEditAction = .None
     }
@@ -94,19 +136,17 @@ class WordSmithViewModel: ObservableObject {
         }
         
         ErrorViewModel.shared.showAlert(alertTitle, alertMessage, [confirmAction, cancelButton(title: "Cancel", { })])
-    
-
     }
     
     func confirmAttempt() {
         let currentAttempt = currentAttempt.compactMap({$0})
-        guard currentAttempt.count == Global.numLetters else { return }
+        guard currentAttempt.count == game.numLetters else { return }
         guard isWord(currentAttempt) else { return }
             
-        currentAttempt.setColor(for: answer)
+        currentAttempt.setColor(for: answer, numLetters: game.numLetters)
         Keyboard.shared.updateColors(for: currentAttempt)
         attempts.append(currentAttempt)
-        Player.updateGuesses(with: currentAttempt.toString())
+        game.updateGuessHistory(with: currentAttempt.toString())
         
         if isCorrect(currentAttempt) {
             showPlayerWonAlert()
@@ -116,7 +156,7 @@ class WordSmithViewModel: ObservableObject {
             showPlayerLostAlert()
         }
         
-        self.currentAttempt = Array(repeating: nil, count: Global.numLetters)
+        self.currentAttempt = Array(repeating: nil, count: game.numLetters)
         self.updateSelection(to: 0, action: .None)
     }
     
@@ -164,12 +204,13 @@ class WordSmithViewModel: ObservableObject {
     }
     
     func reset() {
-        currentAttempt = Array(repeating: nil, count: Global.numLetters)
+        currentAttempt = Array(repeating: nil, count: game.numLetters)
         attempts = []
         hint = nil
         Keyboard.shared.reset()
-        answer = Global.answers.randomElement()!
-        previousBest = max(previousBest, currentStreak)
+        selection = 0
+        lastEditAction = .None
+        answer = answers.randomElement()!
     }
 }
 
@@ -203,13 +244,13 @@ extension WordSmithViewModel {
     
     func showPlayerWonAlert() {
         let alertTitle = "WELL DONE"
-        let alertMessage = "\n\(answer.capitalized) found in \(attempts.count) turns"
+        let alertMessage = "\n\(answer.capitalized) found in \(attempts.count) turn(s)"
         
-        let cancelAction =  {
-            Player.incrementNumPlayed()
-            Player.updateGuessDistribution(with: self.attempts.count)
-            self.currentStreak += 1
-            self.reset()
+        let cancelAction =  { [self] in
+            game.incrementNumPlayed()
+            game.incrementNumGuesses(for: attempts.count)
+            game.incrementCurrStreak()
+            reset()
         }
      
         ErrorViewModel.shared.showAlert(alertTitle, alertMessage, [definitionAction(cancelAction), leaderboardAction(cancelAction), cancelButton(cancelAction)])
@@ -218,12 +259,12 @@ extension WordSmithViewModel {
     func showPlayerLostAlert() {
         // Player is out of attempts
         let alertTitle = "STREAK LOST"
-        let alertMessage = "\nPrevious Best: \(previousBest) \n\nThe word was \(answer.capitalized)"
+        let alertMessage = "\nPrevious Best: \(game.prevBest) \n\nThe word was \(answer.capitalized)"
         
-        let cancelAction = {
-            Player.incrementNumPlayed()
-            self.currentStreak = 0
-            self.reset()
+        let cancelAction = { [self] in
+            game.incrementNumPlayed()
+            game.resetCurrStreak()
+            reset()
         }
         
         ErrorViewModel.shared.showAlert(alertTitle, alertMessage, [definitionAction(cancelAction), leaderboardAction(cancelAction), cancelButton(cancelAction)])
