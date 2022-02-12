@@ -18,24 +18,29 @@ struct HintButton: View {
         Button(action: action) {
             HStack {
                 Image(systemName: "lightbulb.fill")
-                    .foregroundColor(.yellow.opacity(0.9))
-                    .shadow(color: .white.opacity(0.5), radius: 3, x: 0, y: 0)
+                    .foregroundColor(.TEXT.opacity(0.9))
+                    
                 Text("HINT")
                     .font(.system(.headline, design: .rounded))
+                    .foregroundColor(.TEXT)
             }
         }
         .buttonStyle(DarkButtonStyle())
+        .shadow(color: .black.opacity(0.1), radius: 3, x: 0, y: 0)
     }
 }
 
 struct DarkButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .padding(30)
-            .contentShape(Capsule())
+            .padding(20)
+            .foregroundColor(.yellow)
             .background(
-                DarkBackground(isHighlighted: configuration.isPressed, shape: Capsule())
+                Color.HINT
+//                DarkBackground(isHighlighted: configuration.isPressed, shape: Capsule())
             )
+            .clipShape(Capsule())
+        
             .animation(nil)
     }
 }

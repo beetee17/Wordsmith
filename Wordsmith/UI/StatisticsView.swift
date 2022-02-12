@@ -17,6 +17,7 @@ struct StatisticsView: View {
             VStack(spacing: 20) {
                 Text("STATISTICS")
                     .font(.system(size: 20, weight: .bold, design: .default))
+                    .foregroundColor(.TEXT)
                 
                 HStack(alignment: .top) {
                     let numWins = Float(Player.guessDistribution.values.reduce(0, +))
@@ -38,19 +39,19 @@ struct StatisticsView: View {
             }
             .frame(width: Device.width*0.85)
             .padding()
-            .background(Color.BG)
+            .background(Color.STATSBG)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .overlay(
                 Button(action: { withAnimation { isPresented = false } }) {
                     Image(systemName: "multiply.circle")
                         .resizable().scaledToFill()
                         .frame(width: 30, height: 30)
-                        .foregroundColor(.white)
+                        .foregroundColor(.TEXT)
                         .padding(.trailing)
                         .padding(.top, 10)
                 }, alignment: .topTrailing)
             
-            .shadow(color: .BG, radius: 5)
+            .shadow(radius: 5)
         }
         
     }
@@ -66,6 +67,7 @@ struct GuessDistribution: View {
             Text("GUESS DISTRIBUTION")
                 .font(.system(size: 20, weight: .heavy, design: .default))
                 .padding(.bottom)
+                .foregroundColor(.TEXT)
             
             ForEach((1...6).map({"\($0)"}), id: \.self) { index in
                 let value = Float(dict[index] ?? 0) / max(1, total)
@@ -73,11 +75,11 @@ struct GuessDistribution: View {
                 HStack {
                     Text(index)
                         .font(.title2)
+                        .foregroundColor(.TEXT)
                         .frame(width:20)
                     Rectangle()
                         .foregroundColor(.PERFECT)
                         .frame(width: Device.width*0.7*CGFloat(value), height: 20)
-                
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -105,6 +107,8 @@ struct MostGuessed: View {
             Text("MOST GUESSED")
                 .font(.system(size: 20, weight: .heavy, design: .default))
                 .padding(.bottom)
+                .foregroundColor(.TEXT)
+            
             ForEach(Array(zip(words.indices, words)), id: \.0) { index, word in
                 HStack {
                     Text("\(index+1). ")
@@ -113,8 +117,7 @@ struct MostGuessed: View {
                 }
                 .font(.title2)
                 .textCase(.uppercase)
-                    
-                
+                .foregroundColor(.TEXT)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 30)
@@ -129,11 +132,12 @@ struct StatItemView: View {
         VStack {
             Text("\(value)")
                 .font(.largeTitle)
+            
             Text(stat)
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
         }
-        .foregroundColor(.white)
+        .foregroundColor(.TEXT)
         .frame(width: 80)
     }
 }

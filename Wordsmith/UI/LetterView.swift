@@ -13,7 +13,7 @@ struct LetterView: View {
     var letter: Letter?
     var isSelected: Bool
     var animationDuration = 0.2
-    let size = min(90, Device.width/6.4)
+    let size = Device.height < 800 ? 58 : min(90, Device.width/6.4)
     let letterShape = RoundedRectangle(cornerRadius: 10)
     
     var body: some View {
@@ -32,7 +32,7 @@ struct LetterView: View {
             if let letter = letter {
                 Text(letter.string)
                     .font(.system(size: size*0.6, weight: .heavy, design: .monospaced))
-                    .foregroundColor(.white)
+                    .foregroundColor(.TEXT)
                     .textCase(.uppercase)
                     .onAppear {
                         if !letter.isHint {
@@ -51,13 +51,13 @@ struct LetterView: View {
             return .PERFECT
         }
         guard !isSelected else {
-            return .white.opacity(0.8)
+            return .HIGHLIGHT
         }
         guard let letter = letter else {
-            return .secondary.opacity(0.3)
+            return .LOWLIGHT.opacity(0.5)
         }
         guard let color = letter.color else {
-            return .white.opacity(0.8)
+            return .TEXT.opacity(0.8)
         }
         return color.opacity(0.2)
     }

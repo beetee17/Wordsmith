@@ -9,7 +9,7 @@ import SwiftUI
 
 struct KeyboardView: View {
     
-    @EnvironmentObject var viewModel: WordleViewModel
+    @EnvironmentObject var viewModel: WordSmithViewModel
     @ObservedObject var keyboard = Keyboard.shared
     static var buttonHeight = Device.height*0.052
     
@@ -90,7 +90,7 @@ struct KeyboardView: View {
                         .overlay(
                             Image(systemName: "flag.fill")
                                 .resizable().scaledToFit()
-                                .foregroundColor(.white)
+                                .foregroundColor(.TEXT)
                                 .scaleEffect(0.4)
                                 
                         )
@@ -123,7 +123,7 @@ struct KeyboardView: View {
 
 struct KeyboardLetter: View {
     
-    @EnvironmentObject var viewModel: WordleViewModel
+    @EnvironmentObject var viewModel: WordSmithViewModel
     var letter: Letter
     
     var body: some View {
@@ -135,7 +135,7 @@ struct KeyboardLetter: View {
                 .overlay(
                     Text(letter.string)
                         .fontWeight(.semibold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.TEXT)
                         .textCase(.uppercase)
             )
         }
@@ -145,6 +145,6 @@ struct KeyboardLetter: View {
 struct KeyboardView_Previews: PreviewProvider {
     static var previews: some View {
         KeyboardView()
-            .environmentObject(WordleViewModel())
+            .environmentObject(WordSmithViewModel())
     }
 }

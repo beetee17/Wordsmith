@@ -27,8 +27,14 @@ extension Color {
     static let ALMOST = Color(.init(named: "Almost")!)
     static let WRONG = Color(.init(named: "Wrong")!)
     static let KEYBOARD = Color(.init(named: "Keyboard")!)
+    static let KEYBOARDBG = Color(.init(named: "KeyboardBG")!)
+    static let STATSBG = Color(.init(named: "StatsBG")!)
     static let ENTER = Color(.init(named: "Enter")!)
     static let DELETE = Color(.init(named: "Delete")!)
+    static let TEXT = Color(.init(named: "Text")!)
+    static let HIGHLIGHT = Color(.init(named: "Highlight")!)
+    static let LOWLIGHT = Color(.init(named: "Lowlight")!)
+    static let HINT = Color(.init(named: "Hint")!)
     
     static let darkStart = Color.BG.opacity(0.5)
     static let darkEnd = Color(red: 15 / 255, green: 15 / 255, blue: 10 / 255)
@@ -62,14 +68,14 @@ extension Array where Element == Letter {
             res += char.string
         }
     }
-    init(_ str: String, wordle: String? = nil) {
+    init(_ str: String, answer: String? = nil) {
         self.init()
         for index in str.indices {
             let letter = Letter(String(str[index]))
             self.append(letter)
         }
-        if let wordle = wordle {
-            self.setColor(for: wordle)
+        if let answer = answer {
+            self.setColor(for: answer)
         }
     }
 }

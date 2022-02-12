@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopBar: View {
-    @EnvironmentObject var viewModel: WordleViewModel
+    @EnvironmentObject var viewModel: WordSmithViewModel
     @Binding var showStats: Bool
     @Binding var showTutorial: Bool
     @Binding var showLeaderboards: Bool
@@ -19,13 +19,13 @@ struct TopBar: View {
                 Image(systemName: "questionmark.circle.fill")
                     .resizable().scaledToFill()
                     .frame(width:25, height: 25)
-                    .foregroundColor(.white)
+                    .foregroundColor(.TEXT)
             }
             
             Spacer()
             Button(action: { withAnimation { showLeaderboards = true } }) {
                 Text("Win Streak: \(viewModel.currentStreak)")
-                    .foregroundColor(.white)
+                    .foregroundColor(.TEXT)
                     .font(.system(size: 20, weight: .bold, design: .default))
             }
             
@@ -35,7 +35,7 @@ struct TopBar: View {
                 Image("chart.line.uptrend.xyaxis.circle.fill")
                     .resizable().scaledToFill()
                     .frame(width:25, height: 25)
-                    .foregroundColor(.white)
+                    .foregroundColor(.TEXT)
             }
         }
         .padding(.horizontal, 30)
@@ -47,6 +47,6 @@ struct TopBar_Previews: PreviewProvider {
         TopBar(showStats: .constant(false),
                showTutorial: .constant(false),
                showLeaderboards: .constant(false))
-            .environmentObject(WordleViewModel())
+            .environmentObject(WordSmithViewModel())
     }
 }
