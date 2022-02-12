@@ -16,12 +16,12 @@ struct BannerView: View {
             
             VStack(alignment: .leading, spacing:10) {
                 HStack {
-                    Image("icon")
+                    Image("Icon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width:25, height: 25)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
-                    Text("Wordle")
+                    Text("Wordsmith")
                         .foregroundColor(.white.opacity(0.7))
                 }
                 VStack(alignment: .leading, spacing:2) {
@@ -93,7 +93,7 @@ extension View {
 struct BannerView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            Color("Background")
+            Color.white
             Text("Some Text")
             BannerView(title: "Oops, something went wrong", message: "Line 1.\nLine 1.\nLine 2.\nLine 3.\nLine 4.\nLine 5.")
         }
