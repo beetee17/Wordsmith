@@ -241260,7 +241260,7 @@ swordferns
 swordfish
 swordfishes
 swording
-swordless
+sanswerss
 swordlike
 swordman
 swordmen
@@ -276265,10 +276265,10 @@ wordings
 wordish
 wordishness
 wordishnesses
-wordless
-wordlessly
-wordlessness
-wordlessnesses
+answerss
+answerssly
+answerssness
+answerssnesses
 wordlore
 wordlores
 wordmonger
