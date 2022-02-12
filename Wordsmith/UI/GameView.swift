@@ -16,11 +16,12 @@ struct GameView: View {
         VStack {
             
             VStack {
-                TopBar(showStats: $vm.showStats,
-                       showTutorial: $vm.showTutorial,
-                       showLeaderboards: $viewModel.showLeaderboards)
+                TopBar(contentVM: vm)
                 GridView()
-            }.extractGeometry { frame in vm.topSize = frame.height }
+            }
+            .modifier(GeometryExtractor(value: $vm.shouldUpdateFrame) { frame in
+                print("Top Frame change to \(frame.height)")
+                vm.topSize = frame.height })
             
             
             
@@ -29,7 +30,9 @@ struct GameView: View {
             
             KeyboardView()
                 .background(Color.KEYBOARDBG.ignoresSafeArea().frame(height: vm.bottomSize + 20))
-                .extractGeometry { frame in vm.bottomSize = frame.height }
+                .modifier(GeometryExtractor(value: $vm.shouldUpdateFrame) { frame in
+                    print("Bottom Frame change to \(frame.height)")
+                    vm.bottomSize = frame.height })
 
         }
     }

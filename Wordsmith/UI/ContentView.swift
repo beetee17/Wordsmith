@@ -9,11 +9,22 @@ import SwiftUI
 import CoreData
 
 class ContentViewModel: ObservableObject {
-    @Published var showStats = false
-    @Published var showTutorial = false
+    @Published var showStats = false {
+        didSet { shouldUpdateFrame.toggle() }
+    }
+    @Published var showTutorial = false {
+        didSet { shouldUpdateFrame.toggle() }
+    }
+    @Published var showGameModes = false {
+        didSet { shouldUpdateFrame.toggle() }
+    }
+    
     @Published var availableSize: CGFloat = 0
     @Published var topSize: CGFloat = 0
     @Published var bottomSize: CGFloat = 0
+    
+    var shouldUpdateFrame: Bool = false
+    
     var hintButtonSize: CGFloat {
         availableSize - (topSize + bottomSize + 30)
     }
@@ -34,9 +45,9 @@ struct ContentView: View {
             ZStack {
                 Color.BG
                     .ignoresSafeArea()
-                    .extractGeometry { frame in
-                        vm.availableSize = frame.height
-                    }
+                    .modifier(GeometryExtractor(value: .constant(true)) { frame in
+                        print("Available Frame change to \(frame.height)")
+                        vm.availableSize = frame.height })
                 
                 GameView(vm: vm).opacity(vm.showStats ? 0.2 : 1)
                 
@@ -50,12 +61,17 @@ struct ContentView: View {
                         .zIndex(1) // removal transition does not animate when zIndex is not set
                         .transition(.scale)
                 }
+                if vm.showGameModes {
+                    GameModes(isPresented: $vm.showGameModes)
+                        .zIndex(1) // removal transition does not animate when zIndex is not set
+                        .transition(.scale)
+                }
             }
             .banner(isPresented: $errorHandler.bannerIsShown, title: errorHandler.bannerTitle, message: errorHandler.bannerMessage)
             .sheet(isPresented: $viewModel.showDefinition) {
                 DefinitionView(word: viewModel.definitionToShow)
             }
-            //        .overlay(DebugView(), alignment: .trailing)
+//            .overlay(DebugView(), alignment: .trailing)
         }
     }
 }
@@ -77,5 +93,6 @@ struct ContentView_Previews: PreviewProvider {
         }
         .environmentObject(WordSmithViewModel())
         .environmentObject(ErrorViewModel())
+        .environment(\.managedObjectContext, moc_preview)
     }
 }
